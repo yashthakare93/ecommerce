@@ -37,6 +37,13 @@ const addProduct = async (req, res) => {
       salePrice,
       totalStock,
       averageReview,
+      material,
+      color,
+      size,
+      printType,
+      sleeveLength,
+      neckStyle,
+      gender,
     } = req.body;
 
     // Check if the required fields are provided
@@ -57,6 +64,13 @@ const addProduct = async (req, res) => {
       salePrice,
       totalStock,
       averageReview,
+      material,
+      color,
+      size,
+      printType,
+      sleeveLength,
+      neckStyle,
+      gender,
     });
 
     await newlyCreatedProduct.save();
@@ -104,6 +118,13 @@ const editProduct = async (req, res) => {
       salePrice,
       totalStock,
       averageReview,
+      material,
+      color,
+      size,
+      printType,
+      sleeveLength,
+      neckStyle,
+      gender,
     } = req.body;
 
     let findProduct = await Product.findById(id);
@@ -124,6 +145,13 @@ const editProduct = async (req, res) => {
     findProduct.totalStock = totalStock || findProduct.totalStock;
     findProduct.image = image || findProduct.image;
     findProduct.averageReview = averageReview || findProduct.averageReview;
+    findProduct.material = material || findProduct.material;
+    findProduct.color = color || findProduct.color;
+    findProduct.size = size || findProduct.size;
+    findProduct.printType = printType || findProduct.printType;
+    findProduct.sleeveLength = sleeveLength || findProduct.sleeveLength;
+    findProduct.neckStyle = neckStyle || findProduct.neckStyle;
+    findProduct.gender = gender || findProduct.gender;
 
     await findProduct.save();
     res.status(200).json({

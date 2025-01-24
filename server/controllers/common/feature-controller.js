@@ -20,7 +20,7 @@ const addFeatureImage = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
@@ -37,9 +37,43 @@ const getFeatureImages = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
 
-module.exports = { addFeatureImage, getFeatureImages };
+const deleteFeatureImage = async (req, res) => {
+  try {
+    const { imageId } = req.params;
+
+    if (!imageId) {
+      return res.status(400).json({
+        success: false,
+        message: "Image ID not provided.",
+      });
+    }
+
+    const deletedImage = await Feature.findByIdAndDelete(imageId);
+
+    if (!deletedImage) {
+      return res.status(404).json({
+        success: false,
+        message: "Image not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Image deleted successfully.",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while deleting the feature image.",
+    });
+  }
+};
+
+
+module.exports = { addFeatureImage, getFeatureImages, deleteFeatureImage };

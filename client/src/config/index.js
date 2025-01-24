@@ -63,6 +63,11 @@ export const addProductFormElements = [
       { id: "kids", label: "Kids" },
       { id: "accessories", label: "Accessories" },
       { id: "footwear", label: "Footwear" },
+      { id: "tshirt", label: "T-Shirt" },
+      { id: "hoodie", label: "Hoodie" },
+      { id: "cups", label: "Cups" },
+      { id: "cap", label: "Cap" },
+      { id: "bag", label: "Bag" },
     ],
   },
   {
@@ -77,7 +82,86 @@ export const addProductFormElements = [
       { id: "zara", label: "Zara" },
       { id: "h&m", label: "H&M" },
     ],
+  },{
+    label: "Material",
+    name: "material",
+    componentType: "select",
+    options: [
+      { id: "cotton", label: "Cotton" },
+      { id: "polyester", label: "Polyester" },
+      { id: "blend", label: "Blend" },
+      { id: "organic_cotton", label: "Organic Cotton" },
+    ],
   },
+  {
+    label: "Color",
+    name: "color",
+    componentType: "select",
+    options: [
+      { id: "red", label: "Red" },
+      { id: "blue", label: "Blue" },
+      { id: "green", label: "Green" },
+      { id: "black", label: "Black" },
+      { id: "white", label: "White" },
+    ],
+  },
+  {
+    label: "Size",
+    name: "size",
+    componentType: "select",
+    options: [
+      { id: "xs", label: "XS" },
+      { id: "s", label: "S" },
+      { id: "m", label: "M" },
+      { id: "l", label: "L" },
+      { id: "xl", label: "XL" },
+      { id: "xxl", label: "XXL" },
+    ],
+  },
+  {
+    label: "Print Type",
+    name: "printType",
+    componentType: "select",
+    options: [
+      { id: "graphic", label: "Graphic" },
+      { id: "text", label: "Text-Based" },
+      { id: "logo", label: "Logo" },
+      { id: "custom", label: "Custom Design" },
+    ],
+  },
+  {
+    label: "Sleeve Length",
+    name: "sleeveLength",
+    componentType: "select",
+    options: [
+      { id: "sleeveless", label: "Sleeveless" },
+      { id: "half_sleeve", label: "Half Sleeve" },
+      { id: "full_sleeve", label: "Full Sleeve" },
+      { id: "three_quarter", label: "3/4th Sleeve" },
+    ],
+  },
+  {
+    label: "Neck Style",
+    name: "neckStyle",
+    componentType: "select",
+    options: [
+      { id: "round_neck", label: "Round Neck" },
+      { id: "v_neck", label: "V-Neck" },
+      { id: "polo", label: "Polo" },
+      { id: "hooded", label: "Hooded" },
+    ],
+  },
+  {
+    label: "Gender",
+    name: "gender",
+    componentType: "select",
+    options: [
+      { id: "men", label: "Men" },
+      { id: "women", label: "Women" },
+      { id: "unisex", label: "Unisex" },
+    ],
+  },
+  
   {
     label: "Price",
     name: "price",

@@ -24,8 +24,6 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
   const { toast } = useToast();
 
   function handleRatingChange(getRating) {
-    console.log(getRating, "getRating");
-
     setRating(getRating);
   }
 
@@ -43,7 +41,6 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
             title: `Only ${getQuantity} quantity can be added for this item`,
             variant: "destructive",
           });
-
           return;
         }
       }
@@ -96,55 +93,83 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
     if (productDetails !== null) dispatch(getReviews(productDetails?._id));
   }, [productDetails]);
 
-  console.log(reviews, "reviews");
-
   const averageReview =
     reviews && reviews.length > 0
-      ? reviews.reduce((sum, reviewItem) => sum + reviewItem.reviewValue, 0) /
-        reviews.length
+      ? reviews.reduce((sum, reviewItem) => sum + reviewItem.reviewValue, 0) / reviews.length
       : 0;
 
   return (
     <Dialog open={open} onOpenChange={handleDialogClose}>
-      <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
-        <div className="relative overflow-hidden rounded-lg">
+      <DialogContent className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:p-12 max-w-full w-full h-[90vh] sm:h-[90vh] lg:h-[90vh] xl:h-[95vh] mx-auto overflow-auto">
+        <div className="relative overflow-hidden rounded-lg max-h-[400px] sm:max-h-[400px] w-full">
           <img
             src={productDetails?.image}
             alt={productDetails?.title}
-            width={600}
-            height={600}
-            className="aspect-square w-full object-cover"
+            className="w-full h-full object-contain max-h-[400px] max-w-[100%]"
           />
         </div>
-        <div className="">
+
+        <div className="flex flex-col h-full overflow-y-auto">
           <div>
             <h1 className="text-3xl font-extrabold">{productDetails?.title}</h1>
             <p className="text-muted-foreground text-2xl mb-5 mt-4">
               {productDetails?.description}
             </p>
           </div>
-          <div className="flex items-center justify-between">
-            <p
-              className={`text-3xl font-bold text-primary ${
-                productDetails?.salePrice > 0 ? "line-through" : ""
-              }`}
-            >
-              ${productDetails?.price}
-            </p>
-            {productDetails?.salePrice > 0 ? (
-              <p className="text-2xl font-bold text-muted-foreground">
-                ${productDetails?.salePrice}
-              </p>
-            ) : null}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-x-1">
+            <div className="text-4xl font-medium mr-1 relative">
+              ₹ {productDetails?.salePrice}
+            </div>
+            {productDetails?.price && (
+              <div className="flex justify-center items-center gap-3 text-sm sm:text-base">
+                <div className="flex">
+                  <div className="mr-1">M.R.P:</div>
+                  <div className="line-through">₹{productDetails?.price}</div>
+                </div>
+                <div className="text-green-500 font-medium">
+                  ({Math.round(((productDetails?.price - productDetails?.salePrice) / productDetails?.price) * 100)}% off)
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-2 mt-2">
             <div className="flex items-center gap-0.5">
               <StarRatingComponent rating={averageReview} />
             </div>
-            <span className="text-muted-foreground">
-              ({averageReview.toFixed(2)})
-            </span>
+            <span className="text-muted-foreground">({averageReview.toFixed(2)})</span>
           </div>
+
+          <div className="mt-8">
+            <h2 className="text-2xl font-extrabold mb-4">Product Details</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {productDetails?.material && (
+                <p className="flex">
+                  <strong>Material:</strong> {productDetails?.material}
+                </p>
+              )}
+              {productDetails?.color && (
+                <p className="flex">
+                  <strong>Color:</strong> {productDetails?.color}
+                </p>
+              )}
+              {productDetails?.size && (
+                <p className="flex">
+                  <strong>Size:</strong> {productDetails?.size}
+                </p>
+              )}
+              {productDetails?.printType && (
+                <p className="flex">
+                  <strong>Print Type:</strong> {productDetails?.printType}
+                </p>
+              )}
+              {productDetails?.sleeveLength && (
+                <p className="flex">
+                  <strong>Sleeve Length:</strong> {productDetails?.sleeveLength}
+                </p>
+              )}
+            </div>
+          </div>
+
           <div className="mt-5 mb-5">
             {productDetails?.totalStock === 0 ? (
               <Button className="w-full opacity-60 cursor-not-allowed">
@@ -164,35 +189,36 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
               </Button>
             )}
           </div>
-          <Separator />
-          <div className="max-h-[300px] overflow-auto">
-            <h2 className="text-xl font-bold mb-4">Reviews</h2>
-            <div className="grid gap-6">
-              {reviews && reviews.length > 0 ? (
-                reviews.map((reviewItem) => (
-                  <div className="flex gap-4">
-                    <Avatar className="w-10 h-10 border">
-                      <AvatarFallback>
-                        {reviewItem?.userName[0].toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="grid gap-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-bold">{reviewItem?.userName}</h3>
+
+          <div className="max-h-[300px] overflow-auto mt-5">
+            {reviews && reviews.length > 0 && (
+              <>
+                <h2 className="text-xl font-bold mb-4">Reviews</h2>
+                <div className="grid gap-6 max-h-[200px] overflow-auto">
+                  {reviews.map((reviewItem) => (
+                    <div className="flex gap-4" key={reviewItem._id}>
+                      <Avatar className="w-10 h-10 border">
+                        <AvatarFallback>
+                          {reviewItem?.userName[0].toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="grid gap-1">
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-bold">{reviewItem?.userName}</h3>
+                        </div>
+                        <div className="flex items-center gap-0.5">
+                          <StarRatingComponent rating={reviewItem?.reviewValue} />
+                        </div>
+                        <p className="text-muted-foreground">
+                          {reviewItem.reviewMessage}
+                        </p>
                       </div>
-                      <div className="flex items-center gap-0.5">
-                        <StarRatingComponent rating={reviewItem?.reviewValue} />
-                      </div>
-                      <p className="text-muted-foreground">
-                        {reviewItem.reviewMessage}
-                      </p>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <h1>No Reviews</h1>
-              )}
-            </div>
+                  ))}
+                </div>
+              </>
+            )}
+
             <div className="mt-10 flex-col flex gap-2">
               <Label>Write a review</Label>
               <div className="flex gap-1">
@@ -217,7 +243,10 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
           </div>
         </div>
       </DialogContent>
+
     </Dialog>
+
+
   );
 }
 
