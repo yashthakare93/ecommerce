@@ -18,20 +18,31 @@ function AdminProductTile({
             className="w-full h-[300px] object-cover rounded-t-lg"
           />
         </div>
-        <CardContent>
-          <h2 className="text-xl font-bold mb-2 mt-2">{product?.title}</h2>
-          <div className="flex justify-between items-center mb-2">
-            <span
-              className={`${
-                product?.salePrice > 0 ? "line-through" : ""
-              } text-lg font-semibold text-primary`}
-            >
-              ${product?.price}
-            </span>
-            {product?.salePrice > 0 ? (
-              <span className="text-lg font-bold">${product?.salePrice}</span>
-            ) : null}
+        <CardContent className="p-4">
+          <div className="font-medium mb-2 text-center text-lg sm:text-base overflow-hidden text-ellipsis line-clamp-2 h-12">
+            {product?.title}
           </div>
+          <div className="flex flex-wrap sm:flex-nowrap sm:items-center gap-3 sm:gap-4 justify-center sm:justify-start">
+            <div className="text-4xl sm:text-xl font-medium mr-1 relative px-4">
+              ₹ {product?.salePrice}
+            </div>
+            {product?.price && (
+              <div className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-3 text-sm sm:text-base">
+                <div className="flex items-center">
+                  <div className="mr-1">M.R.P:</div>
+                  <div className="line-through">₹{product?.price}</div>
+                </div>
+                <div className="flex items-center text-green-500 font-medium">
+                  {Math.round(
+                    ((product?.price - product?.salePrice) / product?.price) * 100
+                  )}
+                  % off
+                </div>
+              </div>
+
+            )}
+          </div>
+
         </CardContent>
         <CardFooter className="flex justify-between items-center">
           <Button

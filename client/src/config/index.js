@@ -61,26 +61,19 @@ export const addProductFormElements = [
       { id: "men", label: "Men" },
       { id: "women", label: "Women" },
       { id: "kids", label: "Kids" },
-      { id: "accessories", label: "Accessories" },
-      { id: "footwear", label: "Footwear" },
-      { id: "tshirt", label: "T-Shirt" },
-      { id: "hoodie", label: "Hoodie" },
-      { id: "cups", label: "Cups" },
-      { id: "cap", label: "Cap" },
-      { id: "bag", label: "Bag" },
+      { id: "unisex", label: "Unisex" },
     ],
   },
   {
-    label: "Brand",
-    name: "brand",
+    label: "Collection",
+    name: "collection",
     componentType: "select",
     options: [
-      { id: "nike", label: "Nike" },
-      { id: "adidas", label: "Adidas" },
-      { id: "puma", label: "Puma" },
-      { id: "levi", label: "Levi's" },
-      { id: "zara", label: "Zara" },
-      { id: "h&m", label: "H&M" },
+      { id: "oversized-tshirt", label: "Oversized T-shirts" },
+      { id: "classi-fit-tshirts", label: "Classic Fit T-shirts" },
+      { id: "hoodies", label: "Hoodies" },
+      { id: "sweatshirts", label: "Sweatshirts" },
+  
     ],
   },{
     label: "Material",
@@ -89,9 +82,9 @@ export const addProductFormElements = [
     options: [
       { id: "cotton", label: "Cotton" },
       { id: "polyester", label: "Polyester" },
-      { id: "blend", label: "Blend" },
-      { id: "organic_cotton", label: "Organic Cotton" },
-    ],
+      { id: "blend", label: "Cotton-Polyester Blend" },
+    ]
+    
   },
   {
     label: "Color",
@@ -123,11 +116,14 @@ export const addProductFormElements = [
     name: "printType",
     componentType: "select",
     options: [
-      { id: "graphic", label: "Graphic" },
-      { id: "text", label: "Text-Based" },
-      { id: "logo", label: "Logo" },
-      { id: "custom", label: "Custom Design" },
-    ],
+      { id: "screen-print", label: "Screen Print" },
+      { id: "dtg", label: "DTG (Direct-to-Garment)" },
+      { id: "heat-transfer", label: "Heat Transfer" },
+      { id: "embroidery", label: "Embroidery" },
+      { id: "sublimation", label: "Sublimation" },
+      { id: "vinyl", label: "Vinyl Print" },
+    ]
+    
   },
   {
     label: "Sleeve Length",
@@ -212,16 +208,6 @@ export const shoppingViewHeaderMenuItems = [
     path: "/shop/listing",
   },
   {
-    id: "footwear",
-    label: "Footwear",
-    path: "/shop/listing",
-  },
-  {
-    id: "accessories",
-    label: "Accessories",
-    path: "/shop/listing",
-  },
-  {
     id: "search",
     label: "Search",
     path: "/shop/search",
@@ -232,17 +218,13 @@ export const categoryOptionsMap = {
   men: "Men",
   women: "Women",
   kids: "Kids",
-  accessories: "Accessories",
-  footwear: "Footwear",
 };
 
-export const brandOptionsMap = {
-  nike: "Nike",
-  adidas: "Adidas",
-  puma: "Puma",
-  levi: "Levi",
-  zara: "Zara",
-  "h&m": "H&M",
+export const collectionOptionsMap = {
+  oversized_tshirt: "Oversized T-shirts",
+  classic_fit_tshirts: "Classic Fit T-shirts",
+  hoodies: "Hoodies",
+  sweatshirts: "Sweatshirts",
 };
 
 export const filterOptions = {
@@ -250,16 +232,14 @@ export const filterOptions = {
     { id: "men", label: "Men" },
     { id: "women", label: "Women" },
     { id: "kids", label: "Kids" },
-    { id: "accessories", label: "Accessories" },
-    { id: "footwear", label: "Footwear" },
+
   ],
-  brand: [
-    { id: "nike", label: "Nike" },
-    { id: "adidas", label: "Adidas" },
-    { id: "puma", label: "Puma" },
-    { id: "levi", label: "Levi's" },
-    { id: "zara", label: "Zara" },
-    { id: "h&m", label: "H&M" },
+  collection: [
+    { id: "oversized-tshirt", label: "Oversized T-shirts" },
+    { id: "classi-fit-tshirts", label: "Classic Fit T-shirts" },
+    { id: "hoodies", label: "Hoodies" },
+    { id: "sweatshirts", label: "Sweatshirts" },
+
   ],
 };
 

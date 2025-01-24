@@ -16,7 +16,7 @@ const handleImageUpload = async (req, res) => {
       result,
     });
   } catch (error) {
-    console.error("Error uploading image:", error);
+    console.log("Error uploading image:", error);
     res.status(500).json({
       success: false,
       message: "Image upload failed",
@@ -32,7 +32,7 @@ const addProduct = async (req, res) => {
       title,
       description,
       category,
-      brand,
+      collection,
       price,
       salePrice,
       totalStock,
@@ -47,7 +47,7 @@ const addProduct = async (req, res) => {
     } = req.body;
 
     // Check if the required fields are provided
-    if (!title || !description || !category || !brand || !price) {
+    if (!title || !description || !category || !collection || !price) {
       return res.status(400).json({
         success: false,
         message: "Missing required fields",
@@ -59,7 +59,7 @@ const addProduct = async (req, res) => {
       title,
       description,
       category,
-      brand,
+      collection,
       price,
       salePrice,
       totalStock,
@@ -79,7 +79,7 @@ const addProduct = async (req, res) => {
       data: newlyCreatedProduct,
     });
   } catch (error) {
-    console.error("Error adding product:", error);
+    console.log("Error adding product:", error);
     res.status(500).json({
       success: false,
       message: "Error occurred while adding product",
@@ -96,7 +96,7 @@ const fetchAllProducts = async (req, res) => {
       data: listOfProducts,
     });
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.log("Error fetching products:", error);
     res.status(500).json({
       success: false,
       message: "Error occurred while fetching products",
@@ -113,7 +113,7 @@ const editProduct = async (req, res) => {
       title,
       description,
       category,
-      brand,
+      collection,
       price,
       salePrice,
       totalStock,
@@ -138,7 +138,7 @@ const editProduct = async (req, res) => {
     findProduct.title = title || findProduct.title;
     findProduct.description = description || findProduct.description;
     findProduct.category = category || findProduct.category;
-    findProduct.brand = brand || findProduct.brand;
+    findProduct.collection = collection || findProduct.collection;
     findProduct.price = price === "" ? 0 : price || findProduct.price;
     findProduct.salePrice =
       salePrice === "" ? 0 : salePrice || findProduct.salePrice;
@@ -159,7 +159,7 @@ const editProduct = async (req, res) => {
       data: findProduct,
     });
   } catch (error) {
-    console.error("Error editing product:", error);
+    console.log("Error editing product:", error);
     res.status(500).json({
       success: false,
       message: "Error occurred while editing product",
@@ -184,7 +184,7 @@ const deleteProduct = async (req, res) => {
       message: "Product deleted successfully",
     });
   } catch (error) {
-    console.error("Error deleting product:", error);
+    console.log("Error deleting product:", error);
     res.status(500).json({
       success: false,
       message: "Error occurred while deleting product",
